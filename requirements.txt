@@ -1,0 +1,11 @@
+pyrogram==2.0.106
+pydantic==2.7.1
+pydantic-settings==2.2.1
+python-dotenv==1.0.1
+asyncpg-0.29.0
+alembic==1.13.1
+black==24.4.2
+sqlalchemy==2.0.29
+TgCrypto==1.2.5
+redis==4.5.5
+git+https://github.com/kotttee/pyrogram_patch.git@ec0a2f4

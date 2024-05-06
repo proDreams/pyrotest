@@ -1,0 +1,40 @@
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_HOST: ${HOST_DB}
+      POSTGRES_USER: ${USER_DB}
+      POSTGRES_PASSWORD: ${PASSWORD_DB}
+      POSTGRES_DB: ${NAME_DB}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    env_file:
+      - .env
+    ports:
+      - ${PORT_DB}:${PORT_DB}
+    volumes:
+      - ./db_data:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL", "pg_isready -d ${NAME_DB} -U ${USER_DB}"
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis
+    restart: always
+    volumes:
+      - ./redis/:/data
+    ports:
+      - 6379:6379
+
+#  bot:
+#    build: ./bot
+#    restart: always
+#    env_file:
+#      - .env
+#    volumes:
+#      - ./bot:/code
